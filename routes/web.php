@@ -37,9 +37,11 @@ Route::group(['prefix' => 'cart'], function() {
 });
 
 // 管理者ホーム
-Route::get('/admin', 'AdminController@index');
+Route::middleware(['admin_auth'])->group(function() {
+  Route::get('/admin', 'AdminController@index');
+});
 
-Route::group(['prefix' => 'admin/purchase'], function() {
+Route::group(['prefix' => 'admin/purchase', 'middleware' => 'admin_auth'], function() {
   // 販売管理画面
   Route::get('/', 'PurchaseController@index');
   Route::post('/', 'PurchaseController@purchasePost');
