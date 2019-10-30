@@ -36,12 +36,13 @@ class PurchasedetailsTableSeeder extends Seeder
               $price = 100;
               break;
           }
-          $price = $price * $quantity;
+          $total_price = $price * $quantity;
 
           $purchasedetail = [
             'purchase_id' => $faker->numberBetween(1, 20),
             'item_id' => $item_id,
             'price' => $price,
+            'total_price' => $total_price,
             'quantity' => $quantity,
             'created_at' => $faker->dateTimeThisYear,
             'updated_at' => $now,

@@ -11,18 +11,22 @@
 |
 */
 
+Route::get('/index', function () {
+    return view('welcome');
+});
+
 //home
 Route::get('/', 'StatusController@index');
 
 //ユーザーの登録・認証（prefix、namespace使用）
 Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function() {
-  Route::get('register', 'RegisterController@showRegistrationForm');
-  Route::post('register', 'RegisterController@register');
+  Route::get('/register', 'RegisterController@showRegistrationForm');
+  Route::post('/register', 'RegisterController@register');
 
-  Route::get('login', 'LoginController@showLoginForm');
-  Route::post('login', 'LoginController@login');
+  Route::get('/login', 'LoginController@showLoginForm');
+  Route::post('/login', 'LoginController@login');
 
-  Route::get('logout', 'LoginController@logout');
+  Route::get('/logout', 'LoginController@logout');
 });
 
 // カート
@@ -43,8 +47,9 @@ Route::middleware(['admin_auth'])->group(function() {
 
 Route::group(['prefix' => 'admin/purchase', 'middleware' => 'admin_auth'], function() {
   // 販売管理画面
-  Route::get('/', 'PurchaseController@index');
-  Route::post('/', 'PurchaseController@purchasePost');
+  Route::get('/some', 'PurchaseController@index');
+  Route::get('/all', 'PurchaseController@indexAll');
+  Route::post('/some', 'PurchaseController@purchasePost');
   // 販売内容詳細画面
   Route::get('/detail/{id}', 'PurchaseController@detail');
 });

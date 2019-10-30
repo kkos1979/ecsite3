@@ -18,7 +18,7 @@ class PurchaseTableSeeder extends Seeder
 
       for ($i = 1; $i <= 20; $i++) {
 
-        $total_price = Purchasedetail::where('purchase_id', $i)->sum('price');
+        $total_price = Purchasedetail::where('purchase_id', $i)->sum('total_price');
         $purchase = [
           'total_price' => $total_price,
           'user_id' => $faker->numberBetween(2, 12),

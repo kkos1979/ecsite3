@@ -129,7 +129,8 @@ class CartController extends Controller
           Purchasedetail::insert([
             'purchase_id' => $purchase_id,
             'item_id' => $id,
-            'price' => $price * $num,
+            'price' => $price,
+            'total_price' => $price * $num,
             'quantity' => $num,
             'created_at' => $now,
             'updated_at' => $now,

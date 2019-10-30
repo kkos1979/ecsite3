@@ -18,6 +18,7 @@ class CreatePurchaseDetailsTable extends Migration
           $table->integer('purchase_id');
           $table->integer('item_id');
           $table->integer('price');
+          $table->integer('total_price');
           $table->integer('quantity');
           $table->timestamps();
           $table->softDeletes();
