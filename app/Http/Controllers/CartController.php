@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Item;
 use App\Purchase;
 use App\Purchasedetail;
+use App\Purchasechart;
 use App\Mail\OrderShipped; //
 use Gate; // Gateを使用
 use Illuminate\Support\Facades\Mail; // Mailファサードの使用
@@ -132,6 +133,7 @@ class CartController extends Controller
             'price' => $price,
             'total_price' => $price * $num,
             'quantity' => $num,
+            'date' => $num->format('Y-m'),
             'created_at' => $now,
             'updated_at' => $now,
           ]);
@@ -156,6 +158,18 @@ class CartController extends Controller
         'created_at' => $now,
         'updated_at' => $now,
       ]);
+
+      // 販売履歴チャートへの登録
+      $date = date('Y-m');
+      $sales = $sum;
+      if (Purchasechart::where('date', $date)->exists()) {
+        Purchasechart::where('date', $date)->increment('sales', $sales);
+      } else {
+        Purchasecart::insert([
+          'date' => $date,
+          'sales' => $sales,
+        ]);
+      }
 
       // メールの送信
       if (isset($request->email)) {

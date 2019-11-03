@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/index', function () {
+Route::get('/test', function () {
     return view('welcome');
 });
 
@@ -26,7 +26,7 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function() {
   Route::get('/login', 'LoginController@showLoginForm');
   Route::post('/login', 'LoginController@login');
 
-  Route::get('/logout', 'LoginController@logout');
+  Route::get('/logout', 'LoginController@logout')->name('auth.logout');
 });
 
 // カート
@@ -42,21 +42,20 @@ Route::group(['prefix' => 'cart'], function() {
 
 // 管理者ホーム
 Route::middleware(['admin_auth'])->group(function() {
-  Route::get('/admin', 'AdminController@index');
+  Route::get('/admin', 'AdminController@index')->name('admin.home');
 });
 
 Route::group(['prefix' => 'admin/purchase', 'middleware' => 'admin_auth'], function() {
   // 販売管理画面
-  Route::get('/some', 'PurchaseController@index');
-  Route::get('/all', 'PurchaseController@indexAll');
-  Route::post('/some', 'PurchaseController@purchasePost');
+  Route::get('/some', 'PurchaseController@purchaseGet')->name('purchase.get');
+  Route::post('/some', 'PurchaseController@purchasePost')->name('purchase.post');
   // 販売内容詳細画面
-  Route::get('/detail/{id}', 'PurchaseController@detail');
+  Route::get('/detail/{id}', 'PurchaseController@detail')->name('purchase.detail');
 });
 
 Route::group(['prefix' => 'admin/items'], function() {
   // 商品管理画面
-  Route::get('/', 'ItemController@index');
+  Route::get('/', 'ItemController@index')->name('items');
   // 商品編集画面
   Route::get('/edit/{id}', 'ItemController@editGet');
   Route::post('/edit/{id}', 'ItemController@editPost');

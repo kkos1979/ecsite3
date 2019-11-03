@@ -7,7 +7,10 @@
   <div class="card mx-auto" style="width: 50rem;">
     <div class="card-header">
       <h4 style="display: inline-block;;">販売内容詳細</h4>
-      <a class="btn btn-primary float-right" href="../../purchase/{{ $path }}">販売履歴管理</a>
+        @if ($path !== '/admin')
+          <!-- <a class="btn btn-primary float-right" href="{{ route('purchase.get') }}">販売履歴管理</a> -->
+          <a class="btn btn-primary float-right" href="../../purchase/some">販売履歴管理</a>
+        @endif
       <a class="btn btn-primary float-right mr-3" href="../../">HOME</a>
     </div>
     <div class="card-body">

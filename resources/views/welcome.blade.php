@@ -64,6 +64,9 @@
         </style>
     </head>
     <body>
+
+<?= date('Y-m'); ?>
+
         <?php phpinfo(); ?>
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))

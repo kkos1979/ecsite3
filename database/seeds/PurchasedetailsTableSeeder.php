@@ -37,6 +37,8 @@ class PurchasedetailsTableSeeder extends Seeder
               break;
           }
           $total_price = $price * $quantity;
+          $created_at = $faker->dateTimeThisYear;
+          $date = $created_at->format('Y-m');
 
           $purchasedetail = [
             'purchase_id' => $faker->numberBetween(1, 20),
@@ -44,7 +46,8 @@ class PurchasedetailsTableSeeder extends Seeder
             'price' => $price,
             'total_price' => $total_price,
             'quantity' => $quantity,
-            'created_at' => $faker->dateTimeThisYear,
+            'date' => $date,
+            'created_at' => $created_at,
             'updated_at' => $now,
           ];
           DB::table('purchasedetails')->insert($purchasedetail);

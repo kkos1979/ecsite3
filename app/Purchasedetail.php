@@ -12,7 +12,7 @@ class Purchasedetail extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'purchase_id', 'item_id', 'quantity',
+        'purchase_id', 'item_id', 'quantity', 'date',
     ];
 
     public function purchase()
